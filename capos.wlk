@@ -1,9 +1,8 @@
 object rolando {    
     const hogar = castilloDePiedra
-    var cantMaxDeObj = 2
+    var property cantMaxDeObj = 2
     var artefactosRecolectados = []
-
-    method cantMaxDeObj() = cantMaxDeObj  
+    var historialDeEncuentros = []  
     
     method meChoqueCon(algo) {
       algo.meToco(self)
@@ -13,13 +12,30 @@ object rolando {
       if (self.cantDeArtefactos() < self.cantMaxDeObj()){
         artefactosRecolectados.add(artefacto)
       }
+      historialDeEncuentros.add(artefacto)
     }
 
     method cantDeArtefactos() = artefactosRecolectados.size()
 
-    method llegeAMiHogar() {
-      artefactosRecolectados.forEach({ el => ) })
+    method miHogar() {  //??
+      artefactosRecolectados.forEach({ el => hogar.artefactosEnHogar().add(el) })
+      artefactosRecolectados.clear() 
   }
+
+  method artefactosRecolectados() = artefactosRecolectados
+
+  method artefactosQuePosee() = hogar.artefactosEnHogar() + artefactosRecolectados
+}
+
+object castilloDePiedra {
+  var artefactosEnHogar = []
+
+  method artefactosEnHogar() = artefactosEnHogar
+
+  method meToco(alguien) {
+    alguien.miHogar()
+  }
+
 }
 
 object espadaDelDestino {
@@ -48,11 +64,3 @@ object armaduraDeAceroVayrio {
   }
 }
 
-object castilloDePiedra {
-  var artefactosEnHogar = []
-
-  method meToco(alguien) {
-    alguien.llegeAMiHogar()
-  }
-
-}
