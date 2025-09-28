@@ -3,7 +3,29 @@ object rolando {
     var property cantMaxDeObj = 2
     const artefactosRecolectados = []
     const historialDeEncuentros = []  
+    var property poderBase = 5
+
+    method poderDePelea() = self.poderBase() + self.poderDeLaSumatoriaDeArtefactos()
     
+    //sumatoria de poderes 
+    method poderDeLaSumatoriaDeArtefactos() = 
+      artefactosRecolectados.forEach({
+      el => el.poder(self)
+    })
+
+    method ocurreBatalla() {
+      self.usarArtefactosEnBatalla()
+      self.incrementarBase()
+    }
+
+    method usarArtefactosEnBatalla() {
+      artefactosRecolectados.clear()
+    }
+
+    method incrementarBase() {
+      poderBase += 1
+    }
+
     method meChoqueCon(algo) {
       algo.meToco(self)
     }
@@ -46,6 +68,16 @@ object espadaDelDestino {
   method meToco(alguien) {
     alguien.levantarArtefacto(self)
   }
+
+  //personaje.usosEnBatalla(self) == 1
+  method poder(personaje) {
+  if ( ){
+    return personaje.poderBase()
+  }
+  else {
+    return personaje.poderBase() / 2
+  }
+  }
 }
 
 object libroDeHechizos {
@@ -55,15 +87,31 @@ object libroDeHechizos {
 }
 
 object collarDivino {
+  var property poderBase = 3
+
   method meToco(alguien) {
     alguien.levantarArtefacto(self)
+  }
+
+  method poder(personaje){
+    if (personaje.poderBase() > 6){
+      return self.poderBase() //+ personaje.usosEnBatalla(self)
+    } else {
+      return self.poderBase()
+    }
   }
 }
 
 object armaduraDeAceroVayrio {
+  const valorBase = 6
+
+  method valorBase() = valorBase
+
   method meToco(alguien) {
     alguien.levantarArtefacto(self)
   }
+
+  method poder(personaje) = self.valorBase()
 }
 
 
@@ -85,3 +133,4 @@ NO TIENE RETURN
 // detener el error - try cach
 
 //pensar una coleccion como un bolso 
+
