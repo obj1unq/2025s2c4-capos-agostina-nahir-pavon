@@ -1,3 +1,6 @@
+//quien sufre los efectos? todos los artefactos son compartidos? cada persona tiene un unico artefacto?
+//¿¿LOS ARTEFACTOS ENNT TOTAL O LOS QUE TIENE A MANO??
+
 object rolando {    
     const hogar = castilloDePiedra
     var property cantMaxDeObj = 2
@@ -5,13 +8,14 @@ object rolando {
     const historialDeEncuentros = []  
     var property poderBase = 5
 
-    method poderDePelea() = self.poderBase() + self.poderDeLaSumatoriaDeArtefactos()
+    method poderDePelea() = self.poderBase() + self.poderDeLaSumatoriaDeArtefactos(self)
     
     //sumatoria de poderes 
-    method poderDeLaSumatoriaDeArtefactos() = 
-      artefactosRecolectados.forEach({
-      el => el.poder(self)
-    })
+    method poderDeLaSumatoriaDeArtefactos(personaje) = 
+      artefactosRecolectados.sum(
+        {elem => elem.poder(personaje)}
+    )
+      //artefactosRecolectados.forEach({el => el.poder(self)})
 
     method ocurreBatalla() {
       self.usarArtefactosEnBatalla()
@@ -95,6 +99,7 @@ object collarDivino {
 
   method poder(personaje){
     if (personaje.poderBase() > 6){
+      //uso en batalla es compartido? cada persona tiene un unico artefacto?
       return self.poderBase() //+ personaje.usosEnBatalla(self)
     } else {
       return self.poderBase()
