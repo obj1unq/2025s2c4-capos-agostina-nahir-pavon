@@ -1,1 +1,44 @@
-r
+import capos.*
+
+test "rolando comienza con 0 artefactos"{
+	assert.equals(0, rolando.cantDeArtefactos())
+}
+
+describe "rolando se encuentra con artefactos" {
+
+    method initialize() {
+        rolando.meChoqueCon(armaduraDeAceroVayrio)
+        rolando.meChoqueCon(espadaDelDestino)
+    }
+
+    test "rolando tiene 2 artefactos" {
+        assert.equals(2, rolando.cantDeArtefactos())
+    }
+
+    test "rolando tiene una armadura y una espada" {
+        assert.that([armaduraDeAceroVayrio, espadaDelDestino] == rolando.artefactosRecolectados())
+    }
+
+  
+    test "rolando no puede agarrar mas artefactos " {
+     rolando.meChoqueCon(libroDeHechizos)
+     assert.notEquals(3, rolando.cantDeArtefactos())
+    }
+
+    test "rolando no recolecto el libro" {
+      rolando.meChoqueCon(libroDeHechizos)
+      assert.notThat([armaduraDeAceroVayrio, espadaDelDestino, libroDeHechizos] == rolando.artefactosRecolectados())
+    }
+}
+
+
+describe "rolando llego a su hogar" {
+
+    method initialize(){
+        rolando.meChoqueCon(castilloDePiedra)
+    }
+  
+    test "dejo todas sus cosas en el hogar" {
+        assert.equals(0, rolando.cantDeArtefactos())
+    }
+}
